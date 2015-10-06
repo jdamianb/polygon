@@ -9,6 +9,7 @@ public class main {
 	public static void main(String[] args) {
 				
 		System.out.printf("Hi!");
+		System.out.printf("Hahahaha!");
 		
 		InputFile inputFile = new InputFile();
 		inputFile.open("polygon.txt");

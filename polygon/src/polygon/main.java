@@ -7,7 +7,9 @@ import java.awt.geom.Line2D;
 public class main {
 
 	public static void main(String[] args) {
-					
+		
+		System.out.printf("Listo");
+		
 		InputFile inputFile = new InputFile();
 		inputFile.open("polygon.txt");
 

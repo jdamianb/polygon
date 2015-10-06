@@ -1,0 +1,39 @@
+package polygon;
+
+import java.util.ArrayList;
+
+public class main {
+
+	public static void main(String[] args) {
+		
+		//(x,y) clockwise way
+		Point pointA1 = new Point(2,4);
+		Point pointA2 = new Point(1,8);
+		Point pointA3 = new Point(4,9);
+		Point pointA4 = new Point(6,5);
+		
+		Point pointB1 = new Point(4,1);
+		Point pointB2 = new Point(3,6);
+		Point pointB3 = new Point(8,5);
+		Point pointB4 = new Point(6,3);
+				
+		ArrayList<Point> polygonA = new ArrayList<Point>();
+		
+		polygonA.add(pointA1);
+		polygonA.add(pointA2);
+		polygonA.add(pointA3);
+		polygonA.add(pointA4);
+		
+		TwoDimensionsPolygon myPoly = new TwoDimensionsPolygon(polygonA);
+		
+		int[] xpoints = new int[myPoly.GetSize()];
+		int[] ypoints = new int[myPoly.GetSize()];
+		xpoints = myPoly.GetXPoints();
+		ypoints = myPoly.GetYPoints();
+		
+		System.out.print(xpoints[0]);
+		System.out.print(ypoints[0]);
+
+	}
+
+}

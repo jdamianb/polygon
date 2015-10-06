@@ -1,0 +1,33 @@
+package polygon;
+
+import java.util.ArrayList;
+
+public class TwoDimensionsPolygon {
+	
+	public ArrayList<Point> myPolygono;
+	
+	public TwoDimensionsPolygon (ArrayList<Point> poly) {
+		myPolygono = poly;
+	}
+	
+	public int[] GetXPoints() {
+		int[] xpoints = new int[myPolygono.size()];
+		for(int i=0;i<myPolygono.size();i++) {		
+			xpoints[i] = myPolygono.get(i).x;
+		}
+		return xpoints;
+	}
+	
+	public int[] GetYPoints() {
+		int[] ypoints = new int[myPolygono.size()];
+		for(int i=0;i<myPolygono.size();i++) {		
+			ypoints[i] = myPolygono.get(i).y;
+		}
+		return ypoints;
+	}
+	
+	public int GetSize() {
+		int size = myPolygono.size();
+		return size;
+	}
+}

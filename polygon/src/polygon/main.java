@@ -8,124 +8,113 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		System.out.printf("Listo");
+		//==HARCODED==
 		
+		//First, we read the TXT file
+		//So, we create the object that will hold the TXT file
 		InputFile inputFile = new InputFile();
 		inputFile.open("polygon.txt");
-
-		List<Point> polygonA = new ArrayList<Point>();
-		List<Point> polygonB = new ArrayList<Point>();
-		int numberOfSides=0;
-		int xCoordinate=0;
-		int yCoordinate=0;
 		
+		//Now, we define some variables to read the data from the TXT file
+		// I assume that only we have two convex polygons as input
+		List<Point> polygonA = new ArrayList<Point>(); //This is the first polygon
+		List<Point> polygonB = new ArrayList<Point>(); //This is the second
+		int numberOfSides=0; //I'll save temporarily the number of sides here  
+		float xCoordinate=0.0f; //I'll save temporarily the x coordinate from the TXT file here
+		float yCoordinate=0.0f; //I'll save temporarily the y coordinate from the TXT file here
+		
+		//Begin of the reading. It will stop when the end of the whole file is reached
 		while (!inputFile.eof()) {
-			inputFile.readString();
-			numberOfSides=Integer.parseInt(inputFile.readString());
+			inputFile.readString(); //This is the "P", I don't need to store it
+			numberOfSides=Integer.parseInt(inputFile.readString()); //We read the number of sides of the polygon and store it to use later
 			
+			//Now, we use the value of "numberOfSides" to read the coordinates of the polygon
 			for(int j=0; j<numberOfSides; j++) {
-				xCoordinate=Integer.parseInt(inputFile.readString());
-				yCoordinate=Integer.parseInt(inputFile.readString());
-				polygonA.add(new Point(xCoordinate,yCoordinate));
+				//We fulfill the "j" point by reading the "x" and "y" coordinate from the TXT for the first polygon
+				xCoordinate=Float.valueOf(inputFile.readString()); 
+				yCoordinate=Float.valueOf(inputFile.readString());
+				polygonA.add(new Point(xCoordinate,yCoordinate)); //Now the coordinate is loaded into the polygon
 			}
-			inputFile.readString();
-			numberOfSides=Integer.parseInt(inputFile.readString());
+			inputFile.readString(); // Again, the "P" is read but not stored
+			numberOfSides=Integer.parseInt(inputFile.readString()); //Update of numberOfSides
 			
 			for(int j=0; j<numberOfSides; j++) {
-				xCoordinate=Integer.parseInt(inputFile.readString());
-				yCoordinate=Integer.parseInt(inputFile.readString());
-				polygonB.add(new Point(xCoordinate,yCoordinate));
+				//We fulfill the "j" point by reading the "x" and "y" coordinate from the TXT for the second polygon
+				xCoordinate=Float.valueOf(inputFile.readString());
+				yCoordinate=Float.valueOf(inputFile.readString());
+				polygonB.add(new Point(xCoordinate,yCoordinate));//Now the coordinate is loaded into the polygon
 			}
 		}		
 		
-		TwoDimensionsPolygon myPolyA = new TwoDimensionsPolygon(polygonA);
-		TwoDimensionsPolygon myPolyB = new TwoDimensionsPolygon(polygonB);
+		//== We can omit this part???? ==
 		
+		//I create an object "PolygonExtended" for each polygon so we can use some methods defined on this class
+		PolygonExtended myPolyA = new PolygonExtended(polygonA);
+		PolygonExtended myPolyB = new PolygonExtended(polygonB);
+		
+		//As the inputs points were not in order, using the method "orderConvexPolygon" I order the points hourly
 		myPolyA.orderConvexPolygon();	
 		myPolyB.orderConvexPolygon();
-		/*
-		if(Intersection(myPolyA, myPolyB)) {
-			System.out.printf("Se intersectan!!!\n");
-		} else {
-			System.out.printf("No Se intersectan!!!\n");
-		}*/
 		
-		System.out.printf("(%.2f,%.2f)\n",myPolyB.getXPoint(1),myPolyB.getYPoint(1));
-		System.out.printf("(%.2f,%.2f)\n",myPolyB.getXPoint(2),myPolyB.getYPoint(2));
-		System.out.printf("(%.2f,%.2f)\n",myPolyA.getXPoint(4),myPolyA.getYPoint(4));
-		System.out.printf("(%.2f,%.2f)\n",myPolyA.getXPoint(0),myPolyA.getYPoint(0));
+		//== Until here???? ==
 		
-		if(Line2D.linesIntersect(myPolyB.getXPoint(1),myPolyB.getYPoint(1),myPolyB.getXPoint(2),myPolyB.getYPoint(2)
-                				,myPolyA.getXPoint(4),myPolyA.getYPoint(4),myPolyA.getXPoint(0),myPolyA.getYPoint(0))) {
-			System.out.printf("Interseccion!!\n");
-		}else {
-			System.out.printf("Nada man!!\n");
-		}
-		
-		if(Line2D.linesIntersect(-1, 8, 5, 3
-								, 0, 0, -1, 10)) {
-			System.out.printf("Interseccion!!\n");
-		}else {
-			System.out.printf("Nada man!!\n");
-		}
-		
-		if(Line2D.linesIntersect(0, 0, 0.5, 0.5, 0, -0.5, -0.5, 0)) {
-			System.out.printf("Interseccion!!\n");
-		}else {
-			System.out.printf("Nada man!!\n");
-		}
-		
-		TwoDimensionsPolygon polyIntersection;
+		//I create a PolygonExtended to define the new polygon defined by the intersection of the 2 input polygons
+		PolygonExtended polyIntersection;
+		//Get the points of the new polygon
 		polyIntersection = convexGetIntersectionPolygonPoints(myPolyA,myPolyB);
 		polyIntersection.orderConvexPolygon();
-		
+		//Print the coordinates of the new polygon
 		for(int i=0; i<polyIntersection.getSize(); i++) {
-			System.out.printf("coordenada %d: (%.2f,%.2f)\n",i+1,polyIntersection.getXPoint(i),polyIntersection.getYPoint(i));
+			System.out.printf("coordinate %d: (%.2f,%.2f)\n",i+1,polyIntersection.getXPoint(i),polyIntersection.getYPoint(i));
 		}
-		
-		
 	}
 	
-	public static TwoDimensionsPolygon convexGetIntersectionPolygonPoints(TwoDimensionsPolygon polyA, TwoDimensionsPolygon polyB) {
+	//This method will get the points of the polygon made by intersecting two convex polygons
+	public static PolygonExtended convexGetIntersectionPolygonPoints(PolygonExtended polyA, PolygonExtended polyB) {
+		//This Polygon will store the points of the new polygon
 		List<Point> newPolygonPoints = new ArrayList<Point>();		
 		
+		//First, the intersection points created by lines of the polygons crossing each other are going to be find
+		//A line from polygon B is evaluated against the lines of polygon A and so on
+		//There are as many lines as sides of the polygon so the length of the loop will be defined by the dimension of the polygon
 		for(int i=0; i<polyB.getSize(); i++) {
-			for(int j=0; j<polyA.getSize(); j++) {
-				System.out.printf("punto B a evaluar: %d (%.2f,%.2f)\n",i,polyB.getXPoint(i),polyB.getYPoint(i));
+			for(int j=0; j<polyA.getSize(); j++) {				
+				//If we are not evaluating the last coordinate of Polygon A we can proceed. This is important because if that is the case we have to change the way we evaluate it.
 				if(j!=(polyA.getSize()-1)) {
-					System.out.printf("entro: j != polyA size\n");
+					//If not evaluating the last coordinate of Polygon B we can proceed
 					if(i!=(polyB.getSize()-1)) {
-						System.out.printf("entro: i != polyB size\n");
+						//any last point of any polygon is being evaluated so we can go on
+						//Now, using the method "linesIntersect" of the class "Line2D" is possible to know if there is an intersection
 						if(Line2D.linesIntersect(polyB.getXPoint(i),polyB.getYPoint(i),polyB.getXPoint(i+1),polyB.getYPoint(i+1)
 								                ,polyA.getXPoint(j),polyA.getYPoint(j),polyA.getXPoint(j+1),polyA.getYPoint(j+1))){
-							System.out.printf("entro");
+							//Now add the intersection point to the polygon. I get the intersection points using the method "getIntersectionPointLine" which will make line equations with the input points.
 							newPolygonPoints.add(getIntersectionPointLine(polyB.getXPoint(i),polyB.getYPoint(i),polyB.getXPoint(i+1),polyB.getYPoint(i+1)
 					                									 ,polyA.getXPoint(j),polyA.getYPoint(j),polyA.getXPoint(j+1),polyA.getYPoint(j+1)));
 						}
 					} else {
-						System.out.printf("entro: i == polyB size - 1\n");
+						//As the last point of the polygon B is being evaluated we need to change the order of the points that are being evaluated
 						if(Line2D.linesIntersect(polyB.getXPoint(i),polyB.getYPoint(i),polyB.getXPoint(0),polyB.getYPoint(0)
 												,polyA.getXPoint(j),polyA.getYPoint(j),polyA.getXPoint(j+1),polyA.getYPoint(j+1))){
-							System.out.printf("entro");
+							//Now add the intersections points to the polygon
 							newPolygonPoints.add(getIntersectionPointLine(polyB.getXPoint(i),polyB.getYPoint(i),polyB.getXPoint(0),polyB.getYPoint(0)
 																		 ,polyA.getXPoint(j),polyA.getYPoint(j),polyA.getXPoint(j+1),polyA.getYPoint(j+1)));
 						}	
 					}
 				} else {
-					System.out.printf("entro: j == polyA size - 1\n");
+					//As the last point of the polygon A is evaluated, the order of point evaluation has to change
 					if(i!=polyB.getSize()-1) {
-						System.out.printf("entro: i != polyB size\n");
+						//If not evaluating the last point of B then we can proceed with this order
 						if(Line2D.linesIntersect(polyB.getXPoint(i),polyB.getYPoint(i),polyB.getXPoint(i+1),polyB.getYPoint(i+1)
 								                ,polyA.getXPoint(j),polyA.getYPoint(j),polyA.getXPoint(0),polyA.getYPoint(0))){
-							System.out.printf("entro");
+							//Now add the intersections points to the polygon
 							newPolygonPoints.add(getIntersectionPointLine(polyB.getXPoint(i),polyB.getYPoint(i),polyB.getXPoint(i+1),polyB.getYPoint(i+1)
 					                									 ,polyA.getXPoint(j),polyA.getYPoint(j),polyA.getXPoint(0),polyA.getYPoint(0)));
 						}
 					} else {
-						System.out.printf("entro: i == polyB size - 1\n");
+						//As the last point of both polygons are being evaluated we have to come here
 						if(Line2D.linesIntersect(polyB.getXPoint(i),polyB.getYPoint(i),polyB.getXPoint(0),polyB.getYPoint(0)
 												,polyA.getXPoint(j),polyA.getYPoint(j),polyA.getXPoint(0),polyA.getYPoint(0))){
-							System.out.printf("entro!!\n");
+							//Now add the intersections points to the polygon
 							newPolygonPoints.add(getIntersectionPointLine(polyB.getXPoint(i),polyB.getYPoint(i),polyB.getXPoint(0),polyB.getYPoint(0)
 																		 ,polyA.getXPoint(j),polyA.getYPoint(j),polyA.getXPoint(0),polyA.getYPoint(0)));
 						}	
@@ -134,39 +123,40 @@ public class main {
 			}
 		}
 		
+		//Now, look for some points that are part of the new polygon but not created by the intersection of two lines
+		
+		//The i point of polygon B will be evaluated against points of polygon A
 		for(int i=0; i<polyB.getSize(); i++) {
 			for(int j=0; j<polyA.getSize()-1; j++) {
-				System.out.printf("punto B a evaluar: %d (%.2f,%.2f)\n",i,polyB.getXPoint(i),polyB.getYPoint(i));
+				//If the X coordinate of the i point of polygon B is inside the range of two proximate points of polygon A we proceed to evaluate the Y points on the same way  
 				if(new RangeFloat(polyA.getXPoint(j),polyA.getXPoint(j+1)).within(polyB.getXPoint(i))) {
 					if(new RangeFloat(polyA.getYPoint(j),polyA.getYPoint(j+1)).within(polyB.getYPoint(i))) {
-						System.out.printf("el punto que intersecta es: (%.2f,%.2f)\n", polyB.getXPoint(i),polyB.getYPoint(i));
+						//Now add the point to the polygon
 						newPolygonPoints.add(new Point(polyB.getXPoint(i),polyB.getYPoint(i)));
 					}
 				}
 			}
 		}
-		
+		//The i point of polygon A will be evaluated against points of polygon B
 		for(int i=0; i<polyA.getSize(); i++) {
 			for(int j=0; j<polyB.getSize()-1; j++) {
-				System.out.printf("punto A a evaluar: %d (%.2f,%.2f)\n",i,polyA.getXPoint(i),polyA.getYPoint(i));
+				//If the X coordinate of the i point of polygon A is inside the range of two proximate points of polygon B we proceed to evaluate the Y points on the same way
 				if(new RangeFloat(polyB.getXPoint(j),polyB.getXPoint(j+1)).within(polyA.getXPoint(i))) {
 					if(new RangeFloat(polyB.getYPoint(j),polyB.getYPoint(j+1)).within(polyA.getYPoint(i))) {
-						System.out.printf("el punto que intersecta es: (%.2f,%.2f)\n", polyA.getXPoint(i),polyA.getYPoint(i));
+						//Now add the point to the polygon
 						newPolygonPoints.add(new Point(polyB.getXPoint(i),polyB.getYPoint(i)));
 					}
 				}
 			}
 		}
 		
-		TwoDimensionsPolygon newPolygon = new TwoDimensionsPolygon(newPolygonPoints);
-		
-		for(int i=0; i<newPolygon.getSize(); i++) {
-			System.out.printf("coordenada %d: (%.2f,%.2f)\n",i+1,newPolygon.getXPoint(i),newPolygon.getYPoint(i));
-		}
-		
+		//The Points are passed to the polygon that will be returned.
+		PolygonExtended newPolygon = new PolygonExtended(newPolygonPoints);
+		//The new polygon is ready to be delivered!
 		return newPolygon;
 	}
 	
+	//This method has 4 coordinates as input so it can create two lines and get the coordinate of the intersection of those 2 lines.
 	public static Point getIntersectionPointLine (float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2) {
 		
 		float ma=0, mb=0, ba=0, bb=0, xPoint=0, yPoint=0;
@@ -183,7 +173,9 @@ public class main {
 		return coordenate;
 	}
 	
-	public static boolean Intersection(TwoDimensionsPolygon polyA, TwoDimensionsPolygon polyB) {
+	
+	//This method is not used. It only evaluates if two polygons intersect on some point, it does not returns points, only a boolean value
+	public static boolean Intersection(PolygonExtended polyA, PolygonExtended polyB) {
 		boolean result = false;
 		
 		for(int i=0; i<polyB.getSize(); i++) {

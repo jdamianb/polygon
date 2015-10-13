@@ -2,11 +2,11 @@ package polygon;
 
 import java.util.*;
 
-public class TwoDimensionsPolygon {
+public class PolygonExtended {
 	
 	public List<Point> myPolygono;
 	
-	public TwoDimensionsPolygon (List<Point> poly) {
+	public PolygonExtended (List<Point> poly) {
 		myPolygono = poly;
 	}
 	
@@ -44,7 +44,7 @@ public class TwoDimensionsPolygon {
 					}
 				}
 			}
-		System.out.printf("After = ");
+		System.out.printf("Polygon = ");
 		for (int i=0; i<myPolygono.size(); i++) {
 			System.out.printf("(%f,%f) ",myPolygono.get(i).x,myPolygono.get(i).y);
 		}

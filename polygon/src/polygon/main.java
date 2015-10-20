@@ -8,7 +8,7 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		//In order that this code works all the polygons have to intersect with each other
+		//In order that this code works all the polygons must be convex and must intersect with each other
 
 		//First, we read the TXT file
 		//So, we create the object that will hold the TXT file
@@ -186,9 +186,9 @@ public class main {
 		xPoint=-1*(bb-ba)/(mb-ma);
 		yPoint=(xPoint*mb)+bb;
 		
-		Point coordenate = new Point(xPoint,yPoint);
+		Point coordinate = new Point(xPoint,yPoint);
 		
-		return coordenate;
+		return coordinate;
 	}
 	
 	

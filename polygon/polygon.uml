@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:java="http://www.eclipse.org/papyrus/JAVA/1" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_sjyvIHc9EeW9lM73mB2p0Q" name="Polygon">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_p7M4EHdEEeWVbsGyOfNang">
+      <importedPackage xmi:type="uml:Profile" href="pathmap://Papyrus_JAVA_PROFILES/java.profile.uml#_6TYLMN0yEd6P1qtlpBOZyg"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_vD4tUHc9EeW9lM73mB2p0Q" name="main">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_D3bNsHc-EeW9lM73mB2p0Q" name="inputFile" visibility="private" type="_gu2E8Hc-EeW9lM73mB2p0Q"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_0BNGcHc-EeW9lM73mB2p0Q" name="inputfile" type="_gu2E8Hc-EeW9lM73mB2p0Q" association="_0A1TAHc-EeW9lM73mB2p0Q"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_DEOc4HdDEeWVbsGyOfNang" name="Polygon" visibility="private" type="_dYWNwHc_EeW9lM73mB2p0Q" aggregation="shared"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_AQT44ndFEeWVbsGyOfNang" name="point" type="_dYWNwHc_EeW9lM73mB2p0Q" association="_AQTR0HdFEeWVbsGyOfNang"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_fTfyMXdHEeWVbsGyOfNang" name="polygonextended" type="_7BIzYHdGEeWVbsGyOfNang" association="_fTekEHdHEeWVbsGyOfNang"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_rvSAondLEeWVbsGyOfNang" name="rangefloat" type="_7-nLcHdKEeWVbsGyOfNang" association="_rvRZkHdLEeWVbsGyOfNang"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_GCNJkHdGEeWVbsGyOfNang" name="convexGetIntersectionPolygonPoints" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2R1ysHdGEeWVbsGyOfNang" name="polyA" type="_7BIzYHdGEeWVbsGyOfNang"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_thhXIHdHEeWVbsGyOfNang" name="polyB" type="_7BIzYHdGEeWVbsGyOfNang"/>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_77RuIHdLEeWVbsGyOfNang" name="newPolygon" type="_7BIzYHdGEeWVbsGyOfNang" direction="out"/>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_HWS8wHdIEeWVbsGyOfNang" name="getIntersectionPointLine" visibility="public" isStatic="true">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_VIndIHdIEeWVbsGyOfNang" name="ax1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_cF-Q0HdIEeWVbsGyOfNang" name="ay1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_jqGJkHdIEeWVbsGyOfNang" name="ax2">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_oJqFIHdIEeWVbsGyOfNang" name="ay2">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_qorFQHdIEeWVbsGyOfNang" name="bx1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_uFpicHdIEeWVbsGyOfNang" name="by1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_0Acs8HdIEeWVbsGyOfNang" name="bx2">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_2uEJwHdIEeWVbsGyOfNang" name="by2">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_DmE2oHdMEeWVbsGyOfNang" name="coordinate" type="_dYWNwHc_EeW9lM73mB2p0Q" direction="out"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_gu2E8Hc-EeW9lM73mB2p0Q" name="InputFile"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_0A1TAHc-EeW9lM73mB2p0Q" memberEnd="_0BNGcHc-EeW9lM73mB2p0Q _0BOUkHc-EeW9lM73mB2p0Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_0A7ZoHc-EeW9lM73mB2p0Q" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_0A8nwHc-EeW9lM73mB2p0Q" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_0BOUkHc-EeW9lM73mB2p0Q" name="main" type="_vD4tUHc9EeW9lM73mB2p0Q" association="_0A1TAHc-EeW9lM73mB2p0Q"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_dYWNwHc_EeW9lM73mB2p0Q" name="Point">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_DadgsHdFEeWVbsGyOfNang" name="x">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_KcNsMHdFEeWVbsGyOfNang" name="y">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_AQTR0HdFEeWVbsGyOfNang" memberEnd="_AQT44ndFEeWVbsGyOfNang _AQUf8HdFEeWVbsGyOfNang">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_AQT44HdFEeWVbsGyOfNang" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_AQT44XdFEeWVbsGyOfNang" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_AQUf8HdFEeWVbsGyOfNang" name="main" type="_vD4tUHc9EeW9lM73mB2p0Q" association="_AQTR0HdFEeWVbsGyOfNang"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_7BIzYHdGEeWVbsGyOfNang" name="PolygonExtended">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_MxioAHdJEeWVbsGyOfNang" name="myPolygono" type="_dYWNwHc_EeW9lM73mB2p0Q"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_q_Gy0HdJEeWVbsGyOfNang" name="isEmpty">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_PHhEEHdNEeWVbsGyOfNang" name="result" direction="out">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tcaiwHdJEeWVbsGyOfNang" name="orderConvexPolygon"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_uxRc4HdJEeWVbsGyOfNang" name="getXPoint">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_leOHsHdKEeWVbsGyOfNang" name="index">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_tPuDMHdMEeWVbsGyOfNang" name="xpoint" direction="out">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_v7XRcHdJEeWVbsGyOfNang" name="getYPoint">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_oaS3QHdKEeWVbsGyOfNang" name="index">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_rsRTcHdMEeWVbsGyOfNang" name="yPoint" direction="out">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_qfUqEHdKEeWVbsGyOfNang" name="getSize">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_kluukHdMEeWVbsGyOfNang" name="size" direction="out">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_fTekEHdHEeWVbsGyOfNang" memberEnd="_fTfyMXdHEeWVbsGyOfNang _fTgZQHdHEeWVbsGyOfNang">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_fTfLIHdHEeWVbsGyOfNang" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_fTfyMHdHEeWVbsGyOfNang" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_fTgZQHdHEeWVbsGyOfNang" name="main" type="_vD4tUHc9EeW9lM73mB2p0Q" association="_fTekEHdHEeWVbsGyOfNang"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_7-nLcHdKEeWVbsGyOfNang" name="RangeFloat">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_EsAZYHdLEeWVbsGyOfNang" name="min">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_HoG-IHdLEeWVbsGyOfNang" name="max">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+      </ownedAttribute>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RJpl0HdLEeWVbsGyOfNang" name="within" concurrency="guarded">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_dsNugHdLEeWVbsGyOfNang" name="value">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_pJXHQHdLEeWVbsGyOfNang" name="range" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_rvRZkHdLEeWVbsGyOfNang" memberEnd="_rvSAondLEeWVbsGyOfNang _rvSAo3dLEeWVbsGyOfNang">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_rvSAoHdLEeWVbsGyOfNang" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rvSAoXdLEeWVbsGyOfNang" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_rvSAo3dLEeWVbsGyOfNang" name="main" type="_vD4tUHc9EeW9lM73mB2p0Q" association="_rvRZkHdLEeWVbsGyOfNang"/>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tSWaEHdEEeWVbsGyOfNang">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tSXBIHdEEeWVbsGyOfNang" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/JAVA/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_JAVA_PROFILES/java.profile.uml#_6TYLMN0yEd6P1qtlpBOZyg"/>
+    </profileApplication>
+  </uml:Model>
+  <java:JavaMethod xmi:id="_lu3voHdGEeWVbsGyOfNang" base_Operation="_GCNJkHdGEeWVbsGyOfNang"/>
+  <java:JavaMethod xmi:id="_JdcPcHdIEeWVbsGyOfNang" base_Operation="_HWS8wHdIEeWVbsGyOfNang"/>
+  <java:JavaMethod xmi:id="_sVW0EHdJEeWVbsGyOfNang" base_Operation="_q_Gy0HdJEeWVbsGyOfNang"/>
+  <java:JavaMethod xmi:id="_7-OmYHdJEeWVbsGyOfNang" base_Operation="_tcaiwHdJEeWVbsGyOfNang"/>
+  <java:JavaMethod xmi:id="_9nSO4HdJEeWVbsGyOfNang" base_Operation="_uxRc4HdJEeWVbsGyOfNang"/>
+  <java:JavaMethod xmi:id="_DOYaQHdKEeWVbsGyOfNang" base_Operation="_v7XRcHdJEeWVbsGyOfNang"/>
+  <java:JavaMethod xmi:id="_sok1kHdKEeWVbsGyOfNang" base_Operation="_qfUqEHdKEeWVbsGyOfNang"/>
+  <java:JavaMethod xmi:id="_VtlEAHdLEeWVbsGyOfNang" base_Operation="_RJpl0HdLEeWVbsGyOfNang"/>
+</xmi:XMI>

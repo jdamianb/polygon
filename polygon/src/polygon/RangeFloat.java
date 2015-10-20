@@ -14,7 +14,7 @@ public class RangeFloat {
 			min=val2;
 			max=val1;
 		}
-		System.out.printf("%.2f %.2f\n",min,max);
+		//System.out.printf("%.2f %.2f\n",min,max);
 	}
 	
 	public boolean within (float value) {

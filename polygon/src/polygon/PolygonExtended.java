@@ -43,12 +43,11 @@ public class PolygonExtended {
 						myPolygono.set(i+1,tempPoly.get(0));
 					}
 				}
-			}
-		System.out.printf("Polygon = ");
+			}/*
+		System.out.printf("\nPolygon: \n ");
 		for (int i=0; i<myPolygono.size(); i++) {
-			System.out.printf("(%f,%f) ",myPolygono.get(i).x,myPolygono.get(i).y);
-		}
-		System.out.printf("\n");
+			System.out.printf("(%.2f,%.2f)",myPolygono.get(i).x,myPolygono.get(i).y);
+		}*/
 	}
 	
 	public float[] getXPoints() {
@@ -82,5 +81,10 @@ public class PolygonExtended {
 	public int getSize() {
 		int size = myPolygono.size();
 		return size;
+	}
+	
+	public boolean isEmpty() {
+		boolean result = myPolygono.isEmpty();
+		return result;
 	}	
 }

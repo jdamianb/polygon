@@ -8,8 +8,8 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		//==HARCODED==
-		
+		//In order that this code works all the polygons have to intersect with each other
+
 		//First, we read the TXT file
 		//So, we create the object that will hold the TXT file
 		InputFile inputFile = new InputFile();
@@ -17,56 +17,74 @@ public class main {
 		
 		//Now, we define some variables to read the data from the TXT file
 		// I assume that only we have two convex polygons as input
-		List<Point> polygonA = new ArrayList<Point>(); //This is the first polygon
-		List<Point> polygonB = new ArrayList<Point>(); //This is the second
+		List<List<Point>> polygon = new ArrayList<List<Point>>(); //Here all the polygons are stored
+		int numberOfPolygons=0; //Number of polygons to intersect
 		int numberOfSides=0; //I'll save temporarily the number of sides here  
 		float xCoordinate=0.0f; //I'll save temporarily the x coordinate from the TXT file here
 		float yCoordinate=0.0f; //I'll save temporarily the y coordinate from the TXT file here
 		
 		//Begin of the reading. It will stop when the end of the whole file is reached
 		while (!inputFile.eof()) {
-			inputFile.readString(); //This is the "P", I don't need to store it
-			numberOfSides=Integer.parseInt(inputFile.readString()); //We read the number of sides of the polygon and store it to use later
-			
-			//Now, we use the value of "numberOfSides" to read the coordinates of the polygon
-			for(int j=0; j<numberOfSides; j++) {
-				//We fulfill the "j" point by reading the "x" and "y" coordinate from the TXT for the first polygon
-				xCoordinate=Float.valueOf(inputFile.readString()); 
-				yCoordinate=Float.valueOf(inputFile.readString());
-				polygonA.add(new Point(xCoordinate,yCoordinate)); //Now the coordinate is loaded into the polygon
-			}
-			inputFile.readString(); // Again, the "P" is read but not stored
-			numberOfSides=Integer.parseInt(inputFile.readString()); //Update of numberOfSides
-			
-			for(int j=0; j<numberOfSides; j++) {
-				//We fulfill the "j" point by reading the "x" and "y" coordinate from the TXT for the second polygon
-				xCoordinate=Float.valueOf(inputFile.readString());
-				yCoordinate=Float.valueOf(inputFile.readString());
-				polygonB.add(new Point(xCoordinate,yCoordinate));//Now the coordinate is loaded into the polygon
+			numberOfPolygons=Integer.parseInt(inputFile.readString());//Get the number of polygons
+			for(int i=0;i<numberOfPolygons; i++) { //Start to read the coordinates of polygon i
+				inputFile.readString(); //This is the "P", I don't need to store it
+				numberOfSides=Integer.parseInt(inputFile.readString()); //We read the number of sides of the polygon and store it to use later
+				//Now, we use the value of "numberOfSides" to read the coordinates of the polygon
+				polygon.add(i,new ArrayList<Point>()); //Create the space for polygon i
+				for(int j=0; j<numberOfSides; j++) {
+					//We fulfill the "j" point by reading the "x" and "y" coordinate from the TXT for the first polygon
+					xCoordinate=Float.valueOf(inputFile.readString()); 
+					yCoordinate=Float.valueOf(inputFile.readString());
+					polygon.get(i).add(new Point(xCoordinate,yCoordinate));//Now the coordinate is loaded into the polygon
+				}				
 			}
 		}		
+		for(int j=0; j<polygon.size();j++) {
+			System.out.printf("Polygono: %d\n",j);
+			for(int i=0; i<polygon.get(j).size();i++) {
+				System.out.printf("(%.2f,%.2f)", polygon.get(j).get(i).x,polygon.get(j).get(i).y);	
+			}
+			System.out.printf("\n\n");
+		}
 		
 		//== We can omit this part???? ==
 		
-		//I create an object "PolygonExtended" for each polygon so we can use some methods defined on this class
-		PolygonExtended myPolyA = new PolygonExtended(polygonA);
-		PolygonExtended myPolyB = new PolygonExtended(polygonB);
+		//Create a List of ExtendedPolygons
+		List<PolygonExtended> polygonExtended = new ArrayList<PolygonExtended>(); //Here all the polygons are saved
 		
-		//As the inputs points were not in order, using the method "orderConvexPolygon" I order the points hourly
-		myPolyA.orderConvexPolygon();	
-		myPolyB.orderConvexPolygon();
+		for (int i=0; i<polygon.size(); i++) {
+			polygonExtended.add(new PolygonExtended(polygon.get(i))); //Create the space for polygon extended i
+			polygonExtended.get(i).orderConvexPolygon(); //order the points clockwise
+		}
 		
 		//== Until here???? ==
 		
 		//I create a PolygonExtended to define the new polygon defined by the intersection of the 2 input polygons
-		PolygonExtended polyIntersection;
+		PolygonExtended polyIntersection = new PolygonExtended(new ArrayList<Point>());
+		
 		//Get the points of the new polygon
-		polyIntersection = convexGetIntersectionPolygonPoints(myPolyA,myPolyB);
+		if(polygon.size()>2) {
+			for(int i=0; i<polygon.size();i++) {
+				if(polyIntersection.isEmpty()) {
+					polyIntersection = convexGetIntersectionPolygonPoints(polygonExtended.get(i),polygonExtended.get(i+1));
+				} else {
+					polyIntersection = convexGetIntersectionPolygonPoints(polygonExtended.get(i),polyIntersection);
+				}
+			}
+		} else {
+			polyIntersection = convexGetIntersectionPolygonPoints(polygonExtended.get(0),polygonExtended.get(1));
+		}
+		//Order the points of the new polygon clockwise
 		polyIntersection.orderConvexPolygon();
 		//Print the coordinates of the new polygon
-		for(int i=0; i<polyIntersection.getSize(); i++) {
-			System.out.printf("coordinate %d: (%.2f,%.2f)\n",i+1,polyIntersection.getXPoint(i),polyIntersection.getYPoint(i));
-		}
+		try {
+			System.out.printf("Polygon resulting of intersection:");
+			for(int i=0; i<polyIntersection.getSize(); i++) {
+				System.out.printf("\ncoordinate %d: (%.2f,%.2f)",i+1,polyIntersection.getXPoint(i),polyIntersection.getYPoint(i));
+			}
+		} catch (IndexOutOfBoundsException e) {
+		    System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+		} 
 	}
 	
 	//This method will get the points of the polygon made by intersecting two convex polygons
@@ -180,10 +198,10 @@ public class main {
 		
 		for(int i=0; i<polyB.getSize(); i++) {
 			for(int j=0; j<polyA.getSize()-1; j++) {
-				System.out.printf("punto B a evaluar: %d (%.2f,%.2f)\n",i,polyB.getXPoint(i),polyB.getYPoint(i));
+				//System.out.printf("punto B a evaluar: %d (%.2f,%.2f)\n",i,polyB.getXPoint(i),polyB.getYPoint(i));
 				if(new RangeFloat(polyA.getXPoint(j),polyA.getXPoint(j+1)).within(polyB.getXPoint(i))) {
 					if(new RangeFloat(polyA.getYPoint(j),polyA.getYPoint(j+1)).within(polyB.getYPoint(i))) {
-						System.out.printf("el punto que intersecta es: (%.2f,%.2f)\n", polyB.getXPoint(i),polyB.getYPoint(i));
+						//System.out.printf("el punto que intersecta es: (%.2f,%.2f)\n", polyB.getXPoint(i),polyB.getYPoint(i));
 						result = true;
 					}
 				}
@@ -192,10 +210,10 @@ public class main {
 		
 		for(int i=0; i<polyA.getSize(); i++) {
 			for(int j=0; j<polyB.getSize()-1; j++) {
-				System.out.printf("punto A a evaluar: %d (%.2f,%.2f)\n",i,polyA.getXPoint(i),polyA.getYPoint(i));
+				//System.out.printf("punto A a evaluar: %d (%.2f,%.2f)\n",i,polyA.getXPoint(i),polyA.getYPoint(i));
 				if(new RangeFloat(polyB.getXPoint(j),polyB.getXPoint(j+1)).within(polyA.getXPoint(i))) {
 					if(new RangeFloat(polyB.getYPoint(j),polyB.getYPoint(j+1)).within(polyA.getYPoint(i))) {
-						System.out.printf("el punto que intersecta es: (%.2f,%.2f)\n", polyA.getXPoint(i),polyA.getYPoint(i));
+						//System.out.printf("el punto que intersecta es: (%.2f,%.2f)\n", polyA.getXPoint(i),polyA.getYPoint(i));
 						result = true;
 					}
 				}
